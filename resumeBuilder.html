@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>resume builder app</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1> RESUME BUILDER</h1>
+        <form action="#" id="resumeForm">
+            <fieldset>
+                <legend>Personal information</legend>
+                <label for="name">Name:</label><br>
+                <input type="text" name="name" id="name" required><br>
+                <label for="email">Email:</label><br>
+                <input type="email" name="email" id="email" required><br>
+                <label for="phone">Phone:</label><br>
+                <input type="phone" name="phone" id="phone" required><br>
+                <label for="address">Adress:</label><br>
+                <input type="text" name="adress" id="adress" required><br>
+            </fieldset>
+
+            <fieldset>
+                <legend>Education</legend>
+                <label for="education">Education</label>
+                <textarea name="education" id="education" rows="4"> </textarea>
+            </fieldset>
+            <fieldset>
+                <legend>Skills</legend>
+                <label for="skills">Skills</label>
+                <textarea name="skills" id="skills" rows="4"> </textarea>
+            </fieldset>
+            <fieldset>
+                <legend>Experiences</legend>
+                <label for="experience">Experiences</label>
+                <textarea name="experience" id="experience" rows="4"> </textarea>
+            </fieldset>
+            <fieldset>
+                <legend>Achivements</legend>
+                <label for="achivements">Achivements</label>
+                <textarea name="achivements" id="achivements" rows="4"> </textarea>
+            </fieldset>
+            <button id="button" type="submit">Generate Resume</button>
+        </form>
+    
+</body>
+</html>
