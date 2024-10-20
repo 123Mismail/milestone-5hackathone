@@ -58,12 +58,13 @@ document.getElementById("resumeForm")?.addEventListener("submit", (e) => {
     // resume output
 
     const resumeOutput = `
-<h2>Resume</h2> 
+<h2 class="resumeheading">Resume</h2> 
 ${pictureFileURL ? `<img src="${pictureFileURL}" alt="Profile Picture" class="profilePicture">`: ' ' }
-<p><strong>Name:</strong> <span id="edit-name" class="editable">  ${name} </span></p>
-<p><strong>Email:</strong><span id="edit-email" class="editable"> ${email} </span></p>
-<p><strong>Phone:</strong><span id="edit-phone" class="editable"> ${phone} </span></p>
-<p><strong>Address:</strong><span id="edit-address" class="editable"> ${address} </span></p>
+<div class="resumeMain">
+<p class="outPutValues"><strong>Name:</strong> <span id="edit-name" class="editable">  ${name} </span></p>
+<p  class="outPutValues"><strong>Email:</strong><span id="edit-email" class="editable"> ${email} </span></p>
+<p  class="outPutValues"><strong>Phone:</strong><span id="edit-phone" class="editable"> ${phone} </span></p>
+<p  class="outPutValues"><strong>Address:</strong><span id="edit-address" class="editable"> ${address} </span></p>
 
 <h3>Education</h3>
 <p  id="edit-education" class="editable">${education}</p>
@@ -79,6 +80,7 @@ ${pictureFileURL ? `<img src="${pictureFileURL}" alt="Profile Picture" class="pr
 
 <h3>Hobies</h3>
 <p  id="edit-hobies" class="editable">${hobies}</p>
+</div>
 
 `;
 
