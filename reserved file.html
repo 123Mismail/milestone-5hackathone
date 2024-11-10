@@ -1,5 +1,163 @@
 
 
+ 
+document.getElementById("resumeForm")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // getting element by id 
+  // personal informations
+  const usernameUrlElement=document.getElementById('usernameurl') as HTMLInputElement;
+  const pictureElement=document.getElementById('profilePicture') as HTMLInputElement;
+  const nameElement = document.getElementById("name") as HTMLInputElement;
+  const emailElement = document.getElementById("email") as HTMLInputElement;
+  const phoneElement = document.getElementById("phone") as HTMLInputElement;
+  // personal informations
+  // education
+  const educationElement = document.getElementById(
+    "education"
+  ) as HTMLInputElement;
+    // education
+  const skillsElement = document.getElementById("skills") as HTMLInputElement;
+  const experienceElement = document.getElementById(
+    "experience"
+  ) as HTMLInputElement;
+  const addressElement = document.getElementById("address") as HTMLInputElement;
+  const achivementsElement = document.getElementById(
+    "achivements"
+  ) as HTMLInputElement;
+  const hobiesElement = document.getElementById(
+    "hobies"
+  ) as HTMLInputElement;
+
+
+  if ( 
+    pictureElement&&
+    usernameUrlElement&&
+    nameElement &&
+    emailElement &&
+    phoneElement &&
+    educationElement &&
+    skillsElement &&
+    experienceElement &&
+    addressElement &&
+    achivementsElement &&
+    hobiesElement
+  ) {
+    const name = nameElement.value;
+    const email = emailElement.value;
+    const phone = phoneElement.value;
+    const education = educationElement.value;
+    const skills = skillsElement.value;
+    const experience = experienceElement.value;
+    const address = addressElement.value;
+    const achivements = achivementsElement.value;
+    const hobies=hobiesElement.value;
+    const urlByUsername=usernameUrlElement.value;
+
+    // unique path 
+
+    const uniquePath=`resume/${urlByUsername.replace(/\s+/g, '_')}_resume.html`
+    // picture file
+
+    const pictureFile=pictureElement.files?.[0];
+    const pictureFileURL=pictureFile ?URL.createObjectURL(pictureFile) : " ";
+
+    // resume output
+
+    const resumeOutput = `
+<h2 class="resumeheading">Resume</h2> 
+${pictureFileURL ? `<img src="${pictureFileURL}" alt="Profile Picture" class="profilePicture">`: ' ' }
+<div class="resumeMain">
+<div class="left-side"> 
+
+<p class="outPutValues"><strong>Name:</strong> <span id="edit-name" class="editable">  ${name} </span></p>
+<p  class="outPutValues"><strong>Email:</strong><span id="edit-email" class="editable"> ${email} </span></p>
+<p  class="outPutValues"><strong>Phone:</strong><span id="edit-phone" class="editable"> ${phone} </span></p>
+<p  class="outPutValues"><strong>Address:</strong><span id="edit-address" class="editable"> ${address} </span></p>
+
+<h3>Education</h3>
+<p  id="edit-education" class="editable">${education}</p>
+</div>
+// right side
+<div class="right-side"> 
+<h3>Skills</h3>
+<p  id="edit-skills" class="editable">${skills}</p>
+
+<h3>Experience</h3>
+<p  id="edit-experience" class="editable">${experience}</p>
+
+<h3>Achiements</h3>
+<p  id="edit-achivements" class="editable">${achivements}</p>
+
+<h3>Hobies</h3>
+<p  id="edit-hobies" class="editable">${hobies}</p>
+</div>
+</div>
+
+
+`;
+
+// download resume
+const downloadLink=document.createElement('a');
+downloadLink.href='data:text/html;charset:utf-8,' + encodeURIComponent(resumeOutput);
+downloadLink.download=uniquePath;
+downloadLink.textContent='Click here to download your resume'
+
+
+
+    const resumeOutputElement = document.getElementById("resumeOutput");
+    if (resumeOutputElement) {
+      resumeOutputElement.innerHTML = resumeOutput;
+      resumeOutputElement.appendChild(downloadLink)
+    }  
+    editData();
+  } else {
+    console.error(
+      "Its looks like any field is empty .Please fill out all fields"
+    );
+  }
+});
+
+function editData(){
+  const editableElement=document.querySelectorAll('.editable');
+
+  editableElement.forEach(element=>{
+    element.addEventListener('click',()=>{
+       const currentElement=element as HTMLElement;
+       const vurrValue=currentElement.textContent || " ";
+
+// replacing content
+if(currentElement.tagName ==='P' || currentElement.tagName==="SPAN" ){
+
+ const input=document.createElement("input")
+ input.type="text"
+ input.value=vurrValue
+ input.classList.add('edit-inputs')
+
+input.addEventListener('blur',()=>{
+  currentElement.textContent=input.value;
+  currentElement.style.display='inline';
+  input.remove();
+})
+
+currentElement.style.display='none' 
+currentElement.parentNode?.insertBefore(input,currentElement);
+input.focus();
+
+}
+
+    })
+  })
+
+
+}
+
+
+
+<!-- index..ts -->
+
+
+
 let experienceData:any=[];
 let projectsArr:any=[];
 console.log("resume builder")
@@ -138,7 +296,7 @@ console.log(projectsArr,"experince data array");
     
     // unique path 
 
-    const uniquePath=`resume/${urlByUsername.replace(/\s+/g, '_')}index.html`
+    const uniquePath=`resume/${urlByUsername.replace(/\s+/g, '_')}_resume.html`
     // picture file
 
     const pictureFile=pictureElement.files?.[0];
@@ -161,12 +319,6 @@ console.log(projectsArr,"experince data array");
     padding: 0;
     margin: 20px;
     background-color:#f0f4f8;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Full viewport height */
-   
 }  
 .image-div{
     max-height: 300px;
@@ -360,20 +512,12 @@ console.log(projectsArr,"experince data array");
     background: rgb(1, 1, 48);
     color: white;
 }
-    .container{
-    display: flex;
-    justify-content: center;
-    max-width: 1000px;
-    width:100%
-    align-items: center;
-
-    }
+    
          
        </style>
-     <div class="container" >
+    
          
               <div class="left-side">
-               <div style="width :100% ">
             <div class="image-div">
             ${pictureFileURL ? `<img src="${pictureFileURL}" alt="Profile Picture" class="image">`: `<img src="${'profie.jpeg'}" alt="Profile Picture" class="image">`}
            </div>
@@ -382,19 +526,19 @@ console.log(projectsArr,"experince data array");
             <div class="contacts-resume"> 
                 <h3>Contacts</h3>
                 <hr>
-                <p>Address: <span class="editable">${address} </span></p>
-                <p>Phone: <span class="editable">${phone}</span></p>
-                <p>Gmail: <span class="editable">${email}</span></p>
+                <p>Address: <span>${address} </span></p>
+                <p>Phone: <span>${phone}</span></p>
+                <p>Gmail: <span>${email}</span></p>
             
             </div>
             
             <div class="contacts-resume">
                 <h3>Education</h3>
                 <hr>
-                <p class="editable">Matric: <span class="editable">${educationMetric} </span></p>
-                <p class="editable">Intermediate: <span class="editable">${educationInter}</span></p>
-                <p class="editable">Graduation: <span class="editable">${educationGraduation}</span></p>
-                <p class="editable">Masters: <span class="editable">${educationMasters}</span></p>
+                <p>Matric: <span>${educationMetric} </span></p>
+                <p>Intermediate: <span>${educationInter}</span></p>
+                <p>Graduation: <span>${educationGraduation}</span></p>
+                <p>Masters: <span>${educationMasters}</span></p>
             </div>
 
            
@@ -402,43 +546,42 @@ console.log(projectsArr,"experince data array");
                 <h3> Certifications</h3>
                 <hr>
                 ${  certificates.map((cert)=>(
-                  `<p class="editable">  ${cert} </p>`
+                  `<p>  ${cert} </p>`
                 ))}
                 
                 
             </div>
             
              <div class="resume-skills">
-                <h3 class="editable">Skills</h3>
+                <h3>Skills</h3>
                 <hr>
                 <ul>
                 ${ skillsArr && skillsArr.map((skill)=>(
-                           `<li class="editable"> ${skill}</li>`
+                           `<li> ${skill}</li>`
                 ))}
   
             </ul>
              </div>
          
              <div class="resume-hobbies">
-                <h3 class="editable">Hobbies</h3>
+                <h3>Hobbies</h3>
                 <hr>
                 <ul>
                 ${hobbyArr && hobbyArr.map((hobby)=>(
-                  `<li class="editable"> ${hobby}</li>`
+                  `<li> ${hobby}</li>`
                 ))}
             </ul>
              </div>
          </div>
-     </div>
-     
-
-     <div class="right-side">
-       <div style="width :100% ">
+  
+</div>
+ 
+<div class="right-side">
              <div id="download-link">
-                <h2 class="editable">${name}</h2>
+                <h2>${name}</h2>
                 <div class="about-resume">
-                    <h3 class="editable">${abouttitle}</h3>
-                    <p class="editable">${aboutDescription}</p>
+                    <h3>${abouttitle}</h3>
+                    <p>${aboutDescription}</p>
                 </div>
                 <hr>
                 <h3>WORK EXPERIENCE</h3>
@@ -446,8 +589,8 @@ console.log(projectsArr,"experince data array");
                 <!-- experiences -->
                 <div class="resume-experience">
                               ${experienceData && experienceData.map((experience)=>(
-                               ` <div> <h3 class="editable">${experience.title}</h3> <span>${experience.duration}</span></div>
-                    <p class="editable">${experience.description}</p>`
+                               ` <div> <h3>${experience.title}</h3> <span>${experience.duration}</span></div>
+                    <p>${experience.description}</p>`
                               ))}
                 
                 </div>
@@ -458,8 +601,8 @@ console.log(projectsArr,"experince data array");
                     <hr>
                     <div class="projects-details" >
                             ${projectsArr && projectsArr.map((project)=>(
-                           `   <h3 class="editable">${project.title}</h3>
-                              <p class="editable">${project.description}</p>`
+                           `   <h3>${project.title}</h3>
+                              <p>${project.description}</p>`
                             ))}
                        
                     </div>
@@ -472,7 +615,7 @@ console.log(projectsArr,"experince data array");
                         <ul>
                         ${
                           languageArr && languageArr.map((lang)=>(
-                           ` <li  class="editable">${lang}</li>`
+                           ` <li>${lang}</li>`
                           ))
                         }
                           
@@ -480,14 +623,17 @@ console.log(projectsArr,"experince data array");
                         </ul>
                     </div>
              </div>
-             </div>
+             
          </div>
-</div>
-</div>
+
+
  
 `;
 
- 
+// download resume
+
+
+  
 
 // download link
 const downloadLink=document.createElement('a');
@@ -511,8 +657,23 @@ if (resumeOutputElement) {
   } 
 
   
-  
- 
+  //   // creating downloadable link
+  // // Create a downloadable link for the resume
+  // const downloadLink = document.createElement("a");
+  // downloadLink.textContent = "Download Resume";
+  // downloadLink.style.display = "block";
+  // downloadLink.style.marginTop = "10px";
+
+  // // Convert HTML string to Blob and create a URL
+  // const blob = new Blob([resumeOutput], { type: "text/html" });
+  // const url = URL.createObjectURL(blob);
+
+  // // Set the download link properties
+  // downloadLink.href = url;
+  // downloadLink.download = "resume.html";
+
+  // // Append the download link to the output area
+  // resumeOutputElement?.appendChild(downloadLink);
 });
 
 function editData(){
@@ -524,7 +685,7 @@ function editData(){
        const vurrValue=currentElement.textContent || " ";
 
 // replacing content
-if(currentElement.tagName ==='P' || currentElement.tagName==="SPAN"|| currentElement.tagName==="H2" || currentElement.tagName==="H3"){
+if(currentElement.tagName ==='P' || currentElement.tagName==="SPAN" ){
 
  const input=document.createElement("input")
  input.type="text"
@@ -537,7 +698,7 @@ input.addEventListener('blur',()=>{
   input.remove();
 })
 
- 
+currentElement.style.display='none' 
 currentElement.parentNode?.insertBefore(input,currentElement);
 input.focus();
 

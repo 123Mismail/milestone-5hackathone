@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1> RESUME BUILDER</h1>
-        <form action="#" id="resumeForm">
+        <form   id="resumeForm">
             <fieldset>
                 <legend>Personal information</legend>
                 <label for="usernameurl"> Resume URL</label>
@@ -27,37 +27,89 @@
 
             <fieldset>
                 <legend>Education</legend>
-                <label for="education">Education</label>
-                <textarea name="education" id="education"  rows="4"> </textarea>
+                <label for="matric">Matric</label>
+                <input type="text" id="matric"  name="matric" placeholder="enter your matric education" required ><br/>
+                <label for="matric">Intermediate</label>
+                <input type="text" id="intermediate"  name="intermediate" placeholder="enter your intermediate education" required ><br/>
+                <label for="matric">Graduation</label>
+                <input type="text" id="graduation"  name="graduation" placeholder="enter your graduation education" required ><br/>
+                <label for="matric">Masters</label>
+                <input type="text" id="masters"  name="masters" placeholder="enter your masters education" required ><br/>
             </fieldset>
             <fieldset>
                 <legend>Skills</legend>
                 <label for="skills">Skills</label>
-                <textarea name="skills" id="skills" rows="4"> </textarea>
+                <textarea name="skills" id="skills" rows="4" placeholder="enter your skills  seperating with commas, like html,css,javascript"> </textarea>
             </fieldset>
+
+            <fieldset>
+                <legend>About </legend>
+                <label for="matric">About Title</label>
+                <input type="text" id="about-title"  name="bout-title" placeholder="enter your field title" required ><br/>
+                <label for="aboutDescription" >About Description</label>
+                <textarea name="aboutDescription" id="about-description" rows="4" 
+                placeholder="enter your hobbies seprating with commas ,like gym , coding , football, etc"
+                > </textarea>
+            </fieldset>
+
             <fieldset>
                 <legend>Experiences</legend>
-                <label for="experience">Experiences</label>
-                <textarea name="experience" id="experience" rows="4"> </textarea>
+                <label for="experience">Title</label>
+                <input type="text" id="experience-title"  name="experience" placeholder="enter your work place" required ><br/>
+                <label for="experience">Duration </label>
+                <input type="text" id="workduration"  name="workduration" placeholder="enter the starting and ending date " required ><br/>
+                <label for="experience">Description</label>
+                <textarea name="des-experience" id="des-experience" rows="4"
+                write detail of your work experience
+                > </textarea>
             </fieldset>
+<!-- rpojects -->
+<fieldset>
+    <legend>Projects </legend>
+    <label for="matric">Project Title</label>
+    <input type="text" id="project-title"  name="project-title" placeholder="enter your project title" ><br/>
+    <label for="projectDescription" >Project Details</label>
+    <textarea name="project-details" id="project-details" rows="4" 
+    placeholder="enter your hobbies seprating with commas ,like gym , coding , football, etc"
+    > </textarea>
+</fieldset>
+
+
             <fieldset>
-                <legend>Achivements</legend>
-                <label for="achivements">Achivements</label>
-                <textarea name="achivements" id="achivements" rows="4"> </textarea>
+                <legend>Certificates</legend>
+                <label for="certificates">Certificates</label>
+                <textarea name="certificates" id="certificates" rows="4"
+                placeholder="enter your certification names eperating with commas, like Fullstck developer , Ai engineer, etc"
+                > </textarea>
             </fieldset>
             <fieldset>
                 <legend>Hobies</legend>
                 <label for="achivements">Hobies</label>
-                <textarea name="hobies" id="hobies" rows="4"> </textarea>
+                <textarea name="hobies" id="hobies" rows="4" 
+                placeholder="enter your hobbies seprating with commas ,like gym , coding , football, etc"
+                > </textarea>
+            </fieldset>
+            <fieldset>
+                <legend>Languages</legend>
+                <label for="achivements">Languages</label>
+                <textarea name="languages" id="languages" rows="4" 
+                placeholder="enter  languages seprating with commas ,Urdu, English , Balti, etc"
+                > </textarea>
             </fieldset>
             <button id="button" type="submit">Generate Resume</button>
         </form>
         
-         <div id="resumeOutput">
-<!-- resume will be build here -->
-         <div id="resumeOutput" class="outputCustom"></div>
          
-         </div>
+<!-- resume will be build here -->
+  
+
+    <div id="resumeOutput" class="outputCustom" style="display: flex ;">
+        
+    </div>
+  
+         
+         
+        
     <script src="index.js"></script>
 </body>
 </html>
